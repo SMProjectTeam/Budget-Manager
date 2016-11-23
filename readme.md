@@ -5,7 +5,7 @@
 
 ## Technologie i biblioteki
 
-- PHP 7
+- PHP
 - MySQL
 - Laravel 5.3
 - JavaScript
