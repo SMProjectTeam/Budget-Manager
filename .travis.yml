@@ -7,13 +7,6 @@ php:
   #- nightly
 
 before_script:
-  - mkdir bootstrap/cache
-  - mkdir storage
-  - mkdir storage/app
-  - mkdir storage/framework
-  - mkdir storage/framework/sessions
-  - mkdir storage/framework/cache
-  - mkdir storage/framework/views
   - chmod -R 777 bootstrap/cache
   - chmod -R 777 storage
   - cp .env.travis .env
