@@ -1,6 +1,6 @@
 # Budget Manager
 
-[![Build Status](https://travis-ci.com/Saibamen/Budget-Manager.svg?token=aGxL6XsgiKL8Ss4SGZve&branch=master)](https://travis-ci.com/Saibamen/Budget-Manager)
+[![Build Status](https://travis-ci.org/SMProjectTeam/web.svg?branch=master)](https://travis-ci.org/SMProjectTeam/web)
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
 ## Technologie i biblioteki
