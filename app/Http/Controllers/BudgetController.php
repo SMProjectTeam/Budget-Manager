@@ -6,9 +6,11 @@ use App\Http\Requests\BudgetRequest;
 use App\Models\Budget;
 use App\Models\Source;
 use App\Models\Type;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class BudgetController extends Controller {
 
@@ -276,4 +278,43 @@ class BudgetController extends Controller {
         ];
     }
 
+    public function getJSON($type_id = NULL) {
+
+        $object_set = Budget::select("id", "name", "date")
+            ->orderBy("date", "DESC")
+            ->get();
+
+        return response()->json(["result" => $object_set]);
+    }
+
+    public function findObject($id) {
+        $object = Budget::find($id);
+
+        return response()->json(["result" => [$object]]);
+    }
+
+    public function apiDelete(Request $request, $id) {
+        Budget::destroy($id);
+
+        return response()->json("Sucess");
+    }
+
+    public function apiStore(Request $request, $id = NULL) {
+        if($id === NULL) {
+            $object = new Budget;
+        } else {
+            try {
+                $object = Budget::findOrFail($id);
+            } catch(ModelNotFoundException $e) {
+                return response()->json(["bład"]);
+            }
+        }
+
+        $request->request->add(["user_id" => User::first()->id, "type_id" => Type::first()->id, "source_id" => Source::first()->id, "value" => 20, "date" => Budget::first()->date]);
+
+        $object->fill($request->all());
+        $object->save();
+
+        return response()->json(["sucess"]);
+    }
 }
