@@ -181,6 +181,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*

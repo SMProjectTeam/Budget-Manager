@@ -20,7 +20,7 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("budget/add", ["as" => "budget.addform", "uses" => "BudgetController@showAddEditForm"]);
     Route::post("budget/add", ["as" => "budget.postadd", "uses" => "BudgetController@store"]);
     Route::get("budget/edit/{id}", ["as" => "budget.editform", "uses" => "BudgetController@showAddEditForm"])->where(["id" => "[0-9]+"]);
-    Route::post("budget/edit/{id}", [ "uses" => "BudgetController@store"])->where(["id" => "[0-9]+"]);
+    Route::post("budget/edit/{id}", ["as" => "budget.postedit", "uses" => "BudgetController@store"])->where(["id" => "[0-9]+"]);
     Route::delete("budget/delete/{id}", ["as" => "budget.delete", "uses" => "BudgetController@delete"])->where(["id" => "[0-9]+"]);
 
     Route::get("source/{type_id?}", ["as" => "source.index", "uses" => "SourceController@index"])->where(["type_id" => "[0-9]+"]);
@@ -38,6 +38,7 @@ Route::group(["middleware" => "auth"], function () {
 Route::get("lang/{language}", ["as" => "lang.set", "uses" => "Controller@changeLanguage"]);
 
 // Android - NIE puszczać na produkcje bez zrobionej autentykacji
+// TODO: Nie przenieść do routes/api.php?
 // Route::get("api/budgets/{type_id?}", ["uses" => "BudgetController@getJSON"]);
 // Route::get("api/budget/{id}", ["uses" => "BudgetController@findObject"]);
 // Route::post("api/budget/add", ["uses" => "BudgetController@apiStore"]);
