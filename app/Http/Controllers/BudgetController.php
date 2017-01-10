@@ -279,8 +279,7 @@ class BudgetController extends Controller {
     }
 
     public function getJSON($type_id = NULL) {
-
-        $object_set = Budget::select("id", "name", "date")
+        $object_set = Budget::with("type", "user", "source")->select("id", "name", "date", "value", "comment" ,"type_id")
             ->orderBy("date", "DESC")
             ->get();
 
