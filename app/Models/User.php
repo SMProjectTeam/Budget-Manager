@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPasswordNotification;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 /**
  * App\Models\User
@@ -30,7 +31,7 @@ use App\Notifications\ResetPasswordNotification;
  */
 class User extends Authenticatable {
 
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     protected $fillable = [
         "name", "email", "password",
