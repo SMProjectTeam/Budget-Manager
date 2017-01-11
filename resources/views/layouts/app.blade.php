@@ -18,6 +18,8 @@
     {!! Html::style("css/general.css") !!}
     @yield("css")
 
+    {!! Html::favicon("favicon.ico") !!}
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
