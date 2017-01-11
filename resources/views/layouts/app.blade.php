@@ -24,6 +24,29 @@
             "csrfToken" => csrf_token(),
         ]); ?>
     </script>
+
+    <style type="text/css">
+        .navbar-brand {
+            padding: 0px;
+        }
+        .navbar-brand>img {
+            height: 100%;
+            padding: 15px;
+            width: auto;
+        }
+
+        .navbar-brand {
+            height: 80px;
+        }
+        .nav >li >a {
+          padding-top: 30px;
+          padding-bottom: 30px;
+        }
+        .navbar-toggle {
+          padding: 10px;
+          margin: 25px 15px 25px 0;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -40,7 +63,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url("/") }}">
-                    Budget Manager
+                    {{ HTML::image("img/logo.png", "Budget Manager") }}
                 </a>
             </div>
 
