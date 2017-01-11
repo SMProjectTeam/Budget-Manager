@@ -305,15 +305,15 @@ class BudgetController extends Controller {
             try {
                 $object = Budget::findOrFail($id);
             } catch(ModelNotFoundException $e) {
-                return response()->json(["bład"]);
+                return response()->json("Model not found error");
             }
         }
 
-        $request->request->add(["user_id" => User::first()->id, "type_id" => Type::first()->id, "source_id" => Source::first()->id, "value" => 20, "date" => Budget::first()->date]);
+        $request->request->add(["user_id" => User::first()->id]);
 
         $object->fill($request->all());
         $object->save();
 
-        return response()->json(["sucess"]);
+        return response()->json("Sucess");
     }
 }

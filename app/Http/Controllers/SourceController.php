@@ -229,7 +229,6 @@ class SourceController extends Controller {
     }
 
     public function getJSON($type_id = NULL) {
-
         $object_set = Source::with("type")->select("id", "name", "value", "comment" ,"type_id")
             ->get();
 
@@ -255,16 +254,14 @@ class SourceController extends Controller {
             try {
                 $object = Source::findOrFail($id);
             } catch(ModelNotFoundException $e) {
-                return response()->json(["bład"]);
+                return response()->json("Model not found error");
             }
         }
-
-        $request->request->add(["type_id" => Type::first()->id, "value" => 20]);
 
         $object->fill($request->all());
         $object->save();
 
-        return response()->json(["sucess"]);
+        return response()->json("Sucess");
     }
 
 }
