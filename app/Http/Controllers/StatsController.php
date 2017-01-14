@@ -117,4 +117,32 @@ class StatsController extends Controller {
 
         return view("stats", ["title" => $title, "no_data_message" => $no_data_message]);
     }
+
+    public function getJSON() {
+        /*
+         *   Wykres 1 - Wydatki z podziałem na użytkowników
+         */
+        $data = Budget::selectRaw("sum(value) as sum, user_id")
+            ->where("type_id", Type::EXPENDITURE)
+            ->with(["user" => function($query) {
+                $query->select("id", "name");
+            }])
+            ->groupBy("user_id")
+            ->get();
+
+        $js_data[0] = [
+            "title" => trans("general.expenditures_by_users"),
+            "div_id" => "#stat",
+            "js_chart_data" => []
+        ];
+
+        foreach($data as $record) {
+            $js_data[0]["js_chart_data"] += array_merge($js_data[0]["js_chart_data"], [[$record->user->name, (float)$record->sum]]);
+        }
+
+        return response()->json(["result" => $data]);
+
+
+        //return response()->json(["result" => getJSONStatsData()]);
+    }
 }

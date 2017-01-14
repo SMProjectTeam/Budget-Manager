@@ -49,3 +49,5 @@ Route::get("api/source/{id}", ["uses" => "SourceController@findObject"])->where(
 Route::post("api/source/add", ["uses" => "SourceController@apiStore"]);
 Route::post("api/source/edit/{id}", ["uses" => "SourceController@apiStore"])->where(["id" => "[0-9]+"]);
 Route::post("api/source/delete/{id}", ["uses" => "SourceController@apiDelete"])->where(["id" => "[0-9]+"]);
+
+Route::get("api/stats/json", ["uses" => "StatsController@getJSON"]);
