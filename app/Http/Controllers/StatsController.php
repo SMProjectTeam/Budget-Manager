@@ -140,7 +140,28 @@ class StatsController extends Controller {
             $js_data[0]["js_chart_data"] += array_merge($js_data[0]["js_chart_data"], [[$record->user->name, (float)$record->sum]]);
         }
 
-        return response()->json(["result" => $data]);
+        /*
+         *   Wykres 2 - Wydatki z podziałem na źródła
+         */
+        $data2 = Budget::selectRaw("sum(value) as sum, source_id")
+            ->where("type_id", Type::EXPENDITURE)
+            ->with(["source" => function($query) {
+                $query->select("id", "name");
+            }])
+            ->groupBy("source_id")
+            ->get();
+
+        $js_data[1] = [
+            "title" => trans("general.expenditures_by_sources"),
+            "div_id" => "#stat-2",
+            "js_chart_data" => []
+        ];
+
+        foreach($data2 as $record) {
+            $js_data[1]["js_chart_data"] += array_merge($js_data[1]["js_chart_data"], [[$record->source->name, (float)$record->sum]]);
+        }
+
+        return response()->json($js_data);
 
 
         //return response()->json(["result" => getJSONStatsData()]);
